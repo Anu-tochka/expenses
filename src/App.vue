@@ -49,7 +49,7 @@ export default {
       this.paymentList.push(data)
     },
     showForm() {
-      return true
+      return 'true'
     }
    },
 }
