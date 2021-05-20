@@ -1,0 +1,59 @@
+<template>
+  <div class="hello">
+    <input placeholder="Date" v-model="date" />
+    <input placeholder="Category" v-model="category" />
+    <input placeholder="Price" v-model.number="price" />
+    <button @click="save">Save!</button>
+
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      date: '',
+      category: '',
+      price: 0,
+    }
+  },
+  computed: {
+    getCurrentDate () {
+      const today = new Date();
+      const d = today.getDate()
+      const m = today.getMonth() + 1
+      const y = today.getFullYear()
+      return `${d}.${m}.${y}`
+    }
+  },
+  methods: {
+    save() {
+      const data = {
+        date: this.date || this.getCurrentDate,
+        category: this.category,
+        price: this.price,
+      }
+      this.$emit('add', data)
+    }
+  }
+
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+</style>
