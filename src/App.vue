@@ -4,9 +4,9 @@
       Мои расходы
     </header>
     <main>
+      <Button @show="showForm" />
       <PaymentForm @add="addNewPayment" />
       <PaymentList :items="paymentList" />
-	  <Button />
     </main>
     <router-view/>
   </div>
@@ -15,6 +15,7 @@
 <script>
 import PaymentList from './components/PaymentList.vue'
 import PaymentForm from './components/PaymentForm.vue'
+import Button from './components/Button.vue'
 export default {
   name: 'App',
   components: {
@@ -46,8 +47,10 @@ export default {
 	methods: { 
     addNewPayment (data) {
       this.paymentList.push(data)
+    },
+    showForm() {
+      return true
     }
-  
    },
 }
 

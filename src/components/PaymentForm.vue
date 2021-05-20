@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="hello" v-show="true">
     <input placeholder="Date" v-model="date" />
     <input placeholder="Category" v-model="category" />
     <input placeholder="Price" v-model.number="price" />

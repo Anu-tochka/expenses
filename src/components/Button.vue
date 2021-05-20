@@ -1,16 +1,17 @@
 <template>
   <div class="hello">
-    <button>
-      Add
+    <button @click="show">
+      ADD NEW COST+
     </button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+  methods: {
+    show() {
+      this.$emit('show', 'true')
+    },
   }
 }
 </script>
