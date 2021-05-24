@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import App from './App.vue'
+//import App from '../App.vue'
 
 Vue.use(Vuex)
 
@@ -25,23 +25,17 @@ export default new Vuex.Store({
   },
   actions: { 
   fetchData ({ commit }) {
-    return new Promise((resolve) => {
-       // имитируем работу с сетью, ставим задержку получения данных в 1 секунду
-       setTimeout(() => {
-         resolve([
-           { 
-		   }
-         ])
-       }, 1000)
-     })
-       .then(res => {
+    //new Promise((resolve) => {
+       fetch('https://github.com/Anu-tochka/expenses/blob/Vuex/data.json') 
+       .then(response =>  response.json())
+       .then(page1 => {return commit('setPaymentsListData',page1)});
+     }
+    /*   .then(resolve => {
          // запускаем изменение состояния через commit
-         commit('setPaymentsListData', res)
-       })
+         commit('setPaymentsListData', response.json())
+       })*/
   },
   
 
-  },
-  modules: {
-  }
+  
 })

@@ -33,7 +33,6 @@ export default {
     ])
   },
 
-  },
   methods: {
     save() {
       const data = {
@@ -63,7 +62,7 @@ export default {
     },
   },
   mounted () {
-  this.$store.commit(setPaymentListData', this.fetchData())
+  this.$store.commit('setPaymentListData', this.fetchData())
 }
 
 }
