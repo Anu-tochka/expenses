@@ -9,6 +9,9 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
@@ -24,8 +27,12 @@ export default {
       const m = today.getMonth() + 1
       const y = today.getFullYear()
       return `${d}.${m}.${y}`
-    }
+    }, 
+    ...mapGetters([
+      'getPaymentList',
+    ])
   },
+
   methods: {
     save() {
       const data = {
@@ -34,8 +41,29 @@ export default {
         price: this.price,
       }
       this.$emit('add', data)
-    }
-  }
+    },
+      fetchData() {
+     return [ 
+             {
+               date: '28.03.2020',
+        category: 'Food',
+        price: 169,
+      },
+      {
+        date: '24.03.2020',
+        category: 'Transport',
+        price: 360,
+      },
+      {
+        date: '24.03.2020',
+        category: 'Food',
+        price: 532,
+      }]
+    },
+  },
+  mounted () {
+  this.$store.commit('setPaymentListData', this.fetchData())
+}
 
 }
 </script>
