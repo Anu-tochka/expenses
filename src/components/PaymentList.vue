@@ -9,14 +9,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'PaymentList',
-  props: {
-  items: {
-    type: Array,
-    default: () => []
-  }
-},
+  computed: {
+    ...mapGetters([
+      'getPaymentList',
+    ])
+  },
+  
 
 }
 </script>
