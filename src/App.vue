@@ -6,7 +6,7 @@
     <main>
       <Button @show="showForm" />
       <PaymentForm @add="addNewPayment" />
-      <PaymentList :items="paymentList" />
+      <PaymentList />
     </main>
     <router-view/>
   </div>
@@ -24,34 +24,28 @@ export default {
    Button
   },
    data(){
-       return {
-           paymentList: [ 
-             {
-               date: '28.03.2020',
-        category: 'Food',
-        price: 169,
-      },
-      {
-        date: '24.03.2020',
-        category: 'Transport',
-        price: 360,
-      },
-      {
-        date: '24.03.2020',
-        category: 'Food',
-        price: 532,
-      }]
-
-       }   
+          
    },
 	methods: { 
     addNewPayment (data) {
       this.paymentList.push(data)
     },
     showForm() {
-      return true
+      return 'true'
     }
    },
+  mounted: {
+    const links = document.querySelectorAll('a')
+links.forEach(link => {
+  link.addEventListener('click', event => {
+    event.preventDefault()
+    history.pushState({}, '', link.href) 
+    this.$root.$emit('router-go')
+
+  })
+})
+
+  },
 }
 
 </script>

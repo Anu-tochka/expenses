@@ -1,22 +1,33 @@
 <template>
   <div class="hello">
     
-  <div class="table">
+    <div class="table">
       <div class="row" v-for="(item, index) in items" v-bind:key="index">
      {{items}}</div>
     </div>
+    <!-- <Pagination v-bind:n=3 :cur="page" @paginate="onPaginate"> -->
   </div>
 </template>
 
 <script>
+//import Pagination from 'Pagination.vue'
+import { mapGetters } from 'vuex'
 export default {
   name: 'PaymentList',
-  props: {
-  items: {
-    type: Array,
-    default: () => []
-  }
-},
+/*  components: {
+   Pagination
+  },*/
+  methods: {
+  /*  onPaginate(p) {
+      this.page = p
+    }*/
+  },
+  computed: {
+    ...mapGetters([
+      'getPaymentList',
+    ])
+  },
+  
 
 }
 </script>

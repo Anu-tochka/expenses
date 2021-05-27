@@ -5,7 +5,13 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-new Vue({
+new Vue({ 
+  el: 'main',
+  template: '<App />',
+  components: {
+    App,
+  },
+
   router,
   store,
   render: h => h(App)
