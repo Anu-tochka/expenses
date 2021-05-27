@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import PaymentForm from '../components/PaymentForm.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/add/payment/:category',
+    name: 'PaymentForm',
+    component: PaymentForm,
+	props: { value: 0 }
   },
   {
     path: '/about',

@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <button  v-for="i in n" :key="i" @click="go">
+    <button  v-for="i in n" :key="i" @click="go(i)">
       {{i}}
     </button>
   </div>
@@ -8,11 +8,13 @@
 
 <script>
 export default {
+  name: 'Pagination',
   props: {
     n: Number
   }
   methods: {
-    
+    go(p) {
+      this.$emit('paginate'}, p)
   }
 }
 </script>

@@ -1,15 +1,15 @@
 <template>
   <div class="hello" v-show="true">
     <input placeholder="Date" v-model="date" />
-    <input placeholder="Category" v-model="category" />
-    <input placeholder="Price" v-model.number="price" />
+    <input placeholder="Category" v-model="category" />{{ $route.params.id }}
+    <input placeholder="Price" v-model.number="price" />{{ $route.params.value }}
     <button @click="save">Save!</button>
 
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+/*import { mapMutations } from 'vuex'*/
 import { mapGetters } from 'vuex'
 
 export default {
@@ -42,24 +42,7 @@ export default {
       }
       this.$emit('add', data)
     },
-      fetchData() {
-     return [ 
-             {
-               date: '28.03.2020',
-        category: 'Food',
-        price: 169,
-      },
-      {
-        date: '24.03.2020',
-        category: 'Transport',
-        price: 360,
-      },
-      {
-        date: '24.03.2020',
-        category: 'Food',
-        price: 532,
-      }]
-    },
+      
   },
   mounted () {
   this.$store.commit('setPaymentListData', this.fetchData())
