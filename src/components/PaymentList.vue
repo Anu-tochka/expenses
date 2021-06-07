@@ -58,6 +58,7 @@ export default {
   mounted () {
     this.$modal.EventBus.$on('show', this.onShown)
     this.$modal.EventBus.$on('hide', this.onHide)
+    this.category = this.$route.params.category
 }, 
   props: {
     Menu: String,
