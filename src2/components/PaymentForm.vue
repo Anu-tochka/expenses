@@ -1,8 +1,8 @@
 <template>
   <div class="hello" v-show="true">
-    <input placeholder="Date" v-model="date" name="date" />
-    <input placeholder="Category" v-model="category" name="category" />{{ $route.params.id }}
-    <input placeholder="Price" v-model.number="price" name="price" />{{ $route.params.value }}
+    <input placeholder="Date" v-model="date" />
+    <input placeholder="Category" v-model="category" />{{ $route.params.id }}
+    <input placeholder="Price" v-model.number="price" />{{ $route.params.value }}
     <button @click="save">Save!</button>
 
   </div>

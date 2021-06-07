@@ -1,10 +1,7 @@
-﻿<template>
+<template>
   <div id="app">
-    <header> 
-    
-    <h1> 
+    <header>
       Мои расходы
-    </h1> 
     </header>
     <main>
       <Button @show="showForm" />
@@ -26,14 +23,16 @@ export default {
    PaymentForm,
    Button
   },
+   data(){
+          
+   },
 	methods: { 
     addNewPayment (data) {
       this.paymentList.push(data)
     },
     showForm() {
       return 'true'
-    },
-
+    }
    },
   mounted: {
     const links = document.querySelectorAll('a')
