@@ -1,23 +1,22 @@
 <template>
-  <v-card class="text-left pa-8" v-show="true">
-    <v-text-field v-model="date" label="Date" name="date" ></v-text-field>
-    <v-text-field v-model="category" label="Category" name="category" >{{ $route.params.id }}</v-text-field>
-    <v-text-field v-model.number="amount" label="Value" name="price" >{{ $route.params.value }}</v-text-field>
-    <v-btn @click="save">Save!</v-btn>
+  <div class="hello" v-show="true">
+    <input placeholder="Date" v-model="date" />
+    <input placeholder="Category" v-model="category" />{{ $route.params.id }}
+    <input placeholder="Price" v-model.number="price" />{{ $route.params.value }}
+    <button @click="save">Save!</button>
 
-  </v-card>
+  </div>
 </template>
 
 <script>
-/**/
+/*import { mapMutations } from 'vuex'*/
 import { mapGetters } from 'vuex'
 
 export default {
   data () {
     return {
-       dialog: false,
-     date: '',
-     category: '',
+      date: '',
+      category: '',
       price: 0,
     }
   },
