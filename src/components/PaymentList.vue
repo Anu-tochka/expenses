@@ -1,41 +1,55 @@
 <template>
-  <div class="hello">
+  <v-container>
     
-    <div class="table">
-      <div class="row" v-for="(item, index) in items" v-bind:key="index">
-        <div class="cell">{{items.id}}</div>
-        <div class="cell">{{items.date}}</div>
-        <div class="cell">{{items.category}}</div>
-        <div class="cell">{{items.price}}</div>
+    <div class="table"> 
+   <v-row>
+     <v-col :cols="1">#</v-col>
+     <v-col :cols="4">Date</v-col>
+     <v-col :cols="5">Category</v-col>
+     <v-col :cols="2">Value</v-col>
+     <v-col :cols="1"> ... </v-col>
+   </v-row>
 
-        <div class="cell">
+      <v-row v-for="(item, index) in items" v-bind:key="index">
+        <v-col class="cell">{{index}}</v-col>
+        <v-col class="cell">{{items.date}}</v-col>
+        <v-col class="cell">{{items.category}}</v-col>
+        <v-col class="cell">{{items.price}}</v-col>
+
+        <v-col class="cell">
        <transition name="fade">
         <Menu
         v-if="Menu"
         :Menu="Menu"
         :menuSettings="menuSettings"
         />
-           <button @click="$modal.hide()">Close</button></div>
-           </transition>
-      </div>
+           <button @click="$modal.hide()">Close</button>
+           </transition></v-col>
+      </v-row>
     </div>
     <!-- <Pagination v-bind:n=3 :cur="page" @paginate="onPaginate"> -->
-  </div>
+  </v-container>
 </template>
 
 <script>
 //import Pagination from 'Pagination.vue'
+/*import { mapMutations } from 'vuex'*/
 import { mapGetters } from 'vuex'
+import { Bar } from 'vue-chartjs'
 export default {
   name: 'PaymentList',
   components: { 
 //  ModalWindow: () => import('./components/Menu.vue'),
-/*   Pagination
-  },*/
+//   Pagination
+  },
    data(){
        return {
-      Menu: '',
-      menuSettings: {},    
+      date: '',
+      category: '',
+      price: 0,
+       Menu: '',
+       menuSettings: {}
+       }  
    },
   methods: {
   /*  onPaginate(p) {
@@ -49,21 +63,56 @@ export default {
       this.Menu = ''
       this.menuSettings = {}
     },
+    /*  fetchData() {
+     return [ 
+             {
+               date: '28.03.2020',
+        category: 'Food',
+        price: 169,
+      },
+      {
+        date: '24.03.2020',
+        category: 'Transport',
+        price: 360,
+      },
+      {
+        date: '24.03.2020',
+        category: 'Food',
+        price: 532,
+      }]
+    },*/
   },
+			created() {
+			fetch.get(`https://github.com/Anu-tochka/expenses/blob/Vuex/data.json`)
+			.then(response => {
+				this.items = response.data
+			})
+			.catch(e => {
+				this.errors.push(e)
+			})
+		},
   computed: {
     ...mapGetters([
       'getPaymentList',
     ])
+  }, 
+  props: {
+    chartdata: {
+      type: Object,
+      default: null
+    },
+    options: {
+      type: Object,
+      default: null
+    }
   },
+  extends: Bar,
   mounted () {
     this.$modal.EventBus.$on('show', this.onShown)
     this.$modal.EventBus.$on('hide', this.onHide)
     this.category = this.$route.params.category
-}, 
-  props: {
-    Menu: String,
-    menuSettings: Object
-  },
+    this.renderChart(this.chartdata, this.options)
+},
 
 
 

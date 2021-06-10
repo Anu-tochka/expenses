@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import PaymentForm from '../components/PaymentForm.vue'
+import HelloWorld from '../components/HelloWorld.vue'
 
 Vue.use(VueRouter)
 

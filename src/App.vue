@@ -1,31 +1,53 @@
-﻿<template>
-  <div id="app">
-    <header> 
+<template>
+  <v-app>
+    <v-app-bar app> 
     
-    <h1> 
+    <div class="text-h5 text-sm-h3 mt-8 mb-8"> 
       Мои расходы
-    </h1> 
-    </header>
-    <main>
-      <Button @show="showForm" />
+    </div> 
+    </v-app-bar>
+    <v-container>
+   <v-row>
+     <v-col> 
+ <v-dialog v-model="dialog">
+   <template v-slot:activator="{on}">
+      <v-btn color="teal" dark v-on="on" @click="dialog=!dialog" >ADD NEW COST <v-icon>mdi-plus</v-icon></v-btn>
+      <v-btn @click="dialog=false">Close</v-btn>	  
+   </template>
+   <v-card>
+     <!-- FUTURE CONTENT --> 
+   </v-card>
+ </v-dialog>
       <PaymentForm @add="addNewPayment" />
-      <PaymentList />
-    </main>
-    <router-view/>
-  </div>
+      <PaymentList /></v-col>
+     <v-col>
+       <Diagram />
+     </v-col>
+   </v-row>
+    </v-container>
+      <router-view/>
+  </v-app>
 </template>
  
 <script>
 import PaymentList from './components/PaymentList.vue'
-import PaymentForm from './components/PaymentForm.vue'
+import PaymentForm from './components/PaymentForm.vue'/*
 import Button from './components/Button.vue'
+import HelloWorld from './components/HelloWorld.vue'*/
 export default {
   name: 'App',
   components: {
    PaymentList,
    PaymentForm,
-   Button
-  },
+ /*  Button,
+   HelloWorld,*/
+   }, 
+ data () {
+   return {
+     dialog: false,
+   }
+ },
+
 	methods: { 
     addNewPayment (data) {
       this.paymentList.push(data)
@@ -36,7 +58,7 @@ export default {
 
    },
   mounted: {
-    const links = document.querySelectorAll('a')
+/*    const links = document.querySelectorAll('a')
 links.forEach(link => {
   link.addEventListener('click', event => {
     event.preventDefault()
@@ -44,7 +66,7 @@ links.forEach(link => {
     this.$root.$emit('router-go')
 
   })
-})
+})*/
 
   },
 }
