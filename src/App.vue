@@ -1,12 +1,17 @@
 <template>
   <v-app>
-    <v-app-bar app> 
-    
-    <div class="text-h5 text-sm-h3 mt-8 mb-8"> 
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="text-h5 text-sm-h3 mt-8 mb-8"> 
       Мои расходы
-    </div> 
+    </div>
     </v-app-bar>
-    <v-container>
+
+    <v-main>
+      <v-container>
    <v-row>
      <v-col> 
  <v-dialog v-model="dialog">
@@ -19,28 +24,32 @@
    </v-card>
  </v-dialog>
       <PaymentForm @add="addNewPayment" />
-      <PaymentList /></v-col>
+      </v-col>
      <v-col>
        <Diagram />
      </v-col>
    </v-row>
+   <PaymentList />
+   
     </v-container>
-      <router-view/>
+      <!-- <router-view/> --> 
+    </v-main>
   </v-app>
 </template>
- 
+
 <script>
 import PaymentList from './components/PaymentList.vue'
 import PaymentForm from './components/PaymentForm.vue'/*
-import Button from './components/Button.vue'
-import HelloWorld from './components/HelloWorld.vue'*/
+import Button from './components/Button.vue'*/
+import HelloWorld from './components/HelloWorld.vue'
+import Pagination from './components/Pagination.vue'
 export default {
   name: 'App',
   components: {
    PaymentList,
    PaymentForm,
- /*  Button,
-   HelloWorld,*/
+ /*  Button,*/
+   HelloWorld,
    }, 
  data () {
    return {
@@ -55,19 +64,19 @@ export default {
     showForm() {
       return 'true'
     },
-
    },
   mounted: {
-/*    const links = document.querySelectorAll('a')
+  /*  let links = document.querySelectorAll('a')
 links.forEach(link => {
   link.addEventListener('click', event => {
     event.preventDefault()
     history.pushState({}, '', link.href) 
     this.$root.$emit('router-go')
-
   })
-})*/
-
+    this.$modal.EventBus.$on('show', this.onShown)
+    this.$modal.EventBus.$off('hide', this.onHide)
+})
+*/
   },
 }
 
@@ -91,4 +100,4 @@ header {
       color: #42b983;
   */
 }
-</style>
+</script>

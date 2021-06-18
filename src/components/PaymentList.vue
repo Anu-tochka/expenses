@@ -1,11 +1,9 @@
 <template>
-  <v-container>
-    
-    <div class="table"> 
+  
    <v-row>
      <v-col :cols="1">#</v-col>
      <v-col :cols="4">Date</v-col>
-     <v-col :cols="5">Category</v-col>
+     <v-col :cols="4">Category</v-col>
      <v-col :cols="2">Value</v-col>
      <v-col :cols="1"> ... </v-col>
    </v-row>
@@ -26,21 +24,22 @@
            <button @click="$modal.hide()">Close</button>
            </transition></v-col>
       </v-row>
-    </div>
-    <!-- <Pagination v-bind:n=3 :cur="page" @paginate="onPaginate"> -->
-  </v-container>
+    <v-row>
+     <Pagination v-bind:n=3 :cur="page" @paginate="onPaginate"> 
+  </v-row>
 </template>
 
 <script>
-//import Pagination from 'Pagination.vue'
+import Menu from '../plugins/Menu'
+import Pagination from './Pagination'
 /*import { mapMutations } from 'vuex'*/
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { Bar } from 'vue-chartjs'
 export default {
   name: 'PaymentList',
   components: { 
-//  ModalWindow: () => import('./components/Menu.vue'),
-//   Pagination
+  ModalWindow: () => import('./plugins/Menu/index.js'),
+   Pagination
   },
    data(){
        return {
@@ -52,9 +51,13 @@ export default {
        }  
    },
   methods: {
-  /*  onPaginate(p) {
-      this.page = p
-    }*/ 
+    ...mapActions({
+	fetchListData: 'fetchData'
+	}),
+    onPaginate(p) {
+      this.page = 'page'+p
+    this.fetchListData('page'+p)
+    }, 
     onShown (settings) {
       this.Menu = settings.name
       this.menuSettings = settings
@@ -82,15 +85,14 @@ export default {
       }]
     },*/
   },
-			created() {
-			fetch.get(`https://github.com/Anu-tochka/expenses/blob/Vuex/data.json`)
-			.then(response => {
+	/*		created() {
+			//fetch(`https://github.com/Anu-tochka/expenses/blob/Vuex/data.json`)
+			fetch(`../data.json`)
+			.then( function(response) {
 				this.items = response.data
 			})
-			.catch(e => {
-				this.errors.push(e)
-			})
-		},
+			
+		},*/
   computed: {
     ...mapGetters([
       'getPaymentList',
@@ -108,8 +110,7 @@ export default {
   },
   extends: Bar,
   mounted () {
-    this.$modal.EventBus.$on('show', this.onShown)
-    this.$modal.EventBus.$on('hide', this.onHide)
+    this.fetchListData(this.page)
     this.category = this.$route.params.category
     this.renderChart(this.chartdata, this.options)
 },

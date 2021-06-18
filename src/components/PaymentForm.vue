@@ -44,10 +44,10 @@ export default {
       this.$emit('add', data)
     },
       
-  },
+  },/*
   mounted () {
   this.$store.commit('setPaymentListData', this.fetchData())
-}
+}*/
 
 }
 </script>

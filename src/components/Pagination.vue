@@ -11,10 +11,11 @@ export default {
   name: 'Pagination',
   props: {
     n: Number
-  }
+  },
   methods: {
     go(p) {
-      this.$emit('paginate'}, p)
+      this.$emit('paginate', p)
+    }
   }
 }
 </script>
